@@ -1,0 +1,30 @@
+services:
+  master:
+    image: postgres:16.2-alpine3.19
+    container_name: pizza_deliveries_dev_primary
+    volumes:
+      - pizza_deliveries_dev_primary-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pizza_deliveries_dev_primary
+    restart: unless-stopped
+    ports:
+      - "5400:5432"
+  replica1:
+    image: postgres:16.2-alpine3.19
+    container_name: pizza_deliveries_dev_replica
+    volumes:
+      - pizza_deliveries_dev_replica-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pizza_deliveries_dev_replica
+    restart: unless-stopped
+    ports:
+      - "5401:5432"
+volumes:
+  pizza_deliveries_dev_primary-data:
+    name: pizza_deliveries_dev_primary-data
+  pizza_deliveries_dev_replica-data:
+    name: pizza_deliveries_dev_replica-data
