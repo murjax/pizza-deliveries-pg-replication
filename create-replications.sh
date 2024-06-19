@@ -1,7 +1,7 @@
 #!/bin/bash
 
-master_db="pizza_deliveries_dev_primary"
-replicas=("pizza_deliveries_dev_replica")
+master_db="primary_db"
+replicas=("replica_db")
 
 # Copy primary schema to replicas
 docker exec -i $master_db pg_dump --schema-only $master_db -U postgres > new_schema.sql

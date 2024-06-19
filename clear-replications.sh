@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define the master database and the replicas
-master_db="pizza_deliveries_dev_primary"
-replicas=("pizza_deliveries_dev_replica")
+master_db="primary_db"
+replicas=("replica_db")
 
 # Delete subscriptions and reset schema on replicas
 for replica in "${replicas[@]}"; do
