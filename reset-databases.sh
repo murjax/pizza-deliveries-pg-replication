@@ -1,5 +1,5 @@
 #!/bin/bash
-databases=("pizza_deliveries_dev_primary" "pizza_deliveries_dev_replica")
+databases=("primary_db" "replica_db")
 
 for db in "${databases[@]}"; do
     echo "dropping database $db..."

@@ -9,8 +9,6 @@ for replica in "${replicas[@]}"; do
     docker exec -i "$replica" psql -U postgres -d $replica -c "DELETE FROM pg_subscription;"
     docker exec -i "$replica" psql -U postgres -d $replica -c "DELETE FROM pg_subscription_rel;"
     docker exec -i "$replica" psql -U postgres -d $replica -c "DELETE FROM pg_replication_origin;"
-    docker exec -i "$replica" psql -U postgres -d $replica -c "DROP SCHEMA public CASCADE;"
-    docker exec -i "$replica" psql -U postgres -d $replica -c "CREATE SCHEMA public;"
 done
 
 # Delete replication slots from primary
@@ -20,3 +18,5 @@ done
 
 # Delete primary publication
 docker exec -i "$master_db" psql -U postgres -d $master_db -c "DROP PUBLICATION IF EXISTS my_publication;"
+
+# Perform schema changes manually after this point.
